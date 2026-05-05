@@ -1,0 +1,38 @@
+# Dependências
+node_modules/
+
+# Variáveis de ambiente e secrets
+.env
+*.env
+!.env.example
+
+# Chaves Firebase (service account — NUNCA commitar)
+serviceAccountKey.json
+firebase-adminsdk*.json
+*-service-account.json
+
+# Banco de dados SQLite
+*.db
+*.db-shm
+*.db-wal
+
+# Build Angular
+frontend/dist/
+frontend/.angular/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
