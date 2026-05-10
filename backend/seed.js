@@ -121,4 +121,4 @@ console.log('\n🔑 Credenciais de teste (todas com senha "123456"):');
 funcionarios.forEach((f) => {
   console.log(`   ${f.cargo.padEnd(10)} → ${f.email}`);
 });
-console.log('\n⚠️  Lembre-se: estes dados sao apenas para desenvolvimento.');
+console.log('\n⚠️  Lembre-se: estes dados sao apenas para desenvolvimento.'); 
