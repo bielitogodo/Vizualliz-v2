@@ -1,0 +1,63 @@
+<div class="login-page">
+
+  <!-- Header azul-marinho com logo e nome -->
+  <div class="login-header">
+    <div class="logo-circle">🍴</div>
+    <h1>VIZUALLIZ</h1>
+    <p class="subtitle">Smart FoodTech</p>
+  </div>
+
+  <!-- Card do formulário -->
+  <div class="login-card">
+    <div class="card-header">Login</div>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="card-body">
+
+      <!-- Campo: E-mail -->
+      <div class="input-group">
+        <span class="icon">@</span>
+        <input
+          type="email"
+          name="email"
+          [ngModel]="email()"
+          (ngModelChange)="email.set($event)"
+          placeholder="Digite seu E-mail"
+          required
+          [disabled]="loading()"
+        />
+      </div>
+
+      <!-- Campo: Senha -->
+      <div class="input-group">
+        <span class="icon">🔒</span>
+        <input
+          type="password"
+          name="password"
+          [ngModel]="password()"
+          (ngModelChange)="password.set($event)"
+          placeholder="Digite sua senha"
+          required
+          [disabled]="loading()"
+        />
+      </div>
+
+      <!-- Mensagem de erro -->
+      @if (errorMessage()) {
+        <div class="error-message">{{ errorMessage() }}</div>
+      }
+
+      <!-- Botão -->
+      <button type="submit" class="btn-acessar" [disabled]="loading() || !loginForm.valid">
+        @if (loading()) {
+          <span>Entrando...</span>
+        } @else {
+          <span>Acessar</span>
+        }
+      </button>
+
+      <p class="link-senha">Esqueceu sua senha?</p>
+
+    </form>
+  </div>
+
+</div>

@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+// Vizualliz - Estilos Globais
+
+:root {
+  --vz-azul-marinho: #15234F;
+  --vz-azul-medio: #1E5A9C;
+  --vz-branco: #FFFFFF;
+  --vz-cinza-fundo: #F4F6F9;
+  --vz-cinza-borda: #E5EAF2;
+  --vz-cinza-texto: #666666;
+  --vz-erro-bg: #FEE;
+  --vz-erro-texto: #C33;
+  --vz-radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background: var(--vz-cinza-fundo);
+  color: var(--vz-azul-marinho);
+}
+
+button { font-family: inherit; cursor: pointer; }
+input:focus, button:focus { outline: none; }
