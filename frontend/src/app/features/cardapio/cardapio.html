@@ -1,0 +1,81 @@
+<div class="cardapio-page">
+
+  <div class="page-header">
+    <button class="btn-voltar" (click)="voltar()">←</button>
+    <h1>Cardápio</h1>
+  </div>
+
+  <div class="content">
+
+    <div class="card">
+      <h2>Adicionar prato</h2>
+
+      <form (ngSubmit)="onSalvar()" #formCardapio="ngForm">
+
+        <div class="input-group">
+          <label>Nome do prato</label>
+          <input
+            type="text"
+            name="nome"
+            [ngModel]="nome()"
+            (ngModelChange)="nome.set($event)"
+            placeholder="Ex: Pizza Margherita"
+            required
+            [disabled]="salvando()"
+          />
+        </div>
+
+        <div class="input-group">
+          <label>Preço (R$)</label>
+          <input
+            type="number"
+            name="preco"
+            step="0.01"
+            min="0"
+            [ngModel]="preco()"
+            (ngModelChange)="preco.set($event)"
+            placeholder="Ex: 35.00"
+            required
+            [disabled]="salvando()"
+          />
+        </div>
+
+        @if (erro()) {
+          <div class="error-message">{{ erro() }}</div>
+        }
+
+        <button type="submit" class="btn-primary" [disabled]="salvando()">
+          @if (salvando()) {
+            Salvando...
+          } @else {
+            Adicionar prato
+          }
+        </button>
+
+      </form>
+    </div>
+
+    <div class="card lista-card">
+      <h2>Pratos cadastrados</h2>
+
+      @if (carregando()) {
+        <p class="empty-state">Carregando...</p>
+      } @else if (pratos().length === 0) {
+        <p class="empty-state">Nenhum prato cadastrado ainda.</p>
+      } @else {
+        <ul class="lista-pratos">
+          @for (prato of pratos(); track prato.id) {
+            <li class="prato-item">
+              <div class="prato-info">
+                <span class="prato-nome">{{ prato.nome }}</span>
+                <span class="prato-preco">R$ {{ prato.preco | number:'1.2-2' }}</span>
+              </div>
+              <button class="btn-remover" (click)="onRemover(prato)">🗑️</button>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+
+  </div>
+</div>

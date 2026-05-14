@@ -1,0 +1,182 @@
+.cardapio-page {
+  min-height: 100vh;
+  background: var(--vz-cinza-fundo);
+}
+
+// Header azul-marinho
+.page-header {
+  background: var(--vz-azul-marinho);
+  color: var(--vz-branco);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-radius: 0 0 30% 30% / 0 0 40px 40px;
+
+  .btn-voltar {
+    background: transparent;
+    border: none;
+    color: var(--vz-branco);
+    font-size: 28px;
+    cursor: pointer;
+    padding: 4px 8px;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  h1 {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0;
+  }
+}
+
+// Conteúdo
+.content {
+  padding: 24px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+// Cards (formulário e lista)
+.card {
+  background: var(--vz-branco);
+  border-radius: var(--vz-radius);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--vz-cinza-borda);
+
+  h2 {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--vz-azul-marinho);
+    margin-bottom: 18px;
+  }
+}
+
+// Inputs do formulário
+.input-group {
+  margin-bottom: 16px;
+
+  label {
+    display: block;
+    font-size: 13px;
+    color: var(--vz-cinza-texto);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid var(--vz-cinza-borda);
+    border-radius: 8px;
+    font-size: 15px;
+    color: var(--vz-azul-marinho);
+    transition: border-color 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: var(--vz-azul-marinho);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// Mensagem de erro
+.error-message {
+  background: var(--vz-erro-bg);
+  color: var(--vz-erro-texto);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+// Botão principal
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background: var(--vz-azul-marinho);
+  color: var(--vz-branco);
+  border: none;
+  border-radius: 24px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Lista de pratos
+.empty-state {
+  text-align: center;
+  color: var(--vz-cinza-texto);
+  font-size: 14px;
+  padding: 20px 0;
+}
+
+.lista-pratos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.prato-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--vz-cinza-borda);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .prato-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .prato-nome {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--vz-azul-marinho);
+  }
+
+  .prato-preco {
+    font-size: 13px;
+    color: var(--vz-cinza-texto);
+  }
+
+  .btn-remover {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    transition: background 0.2s;
+
+    &:hover {
+      background: var(--vz-erro-bg);
+    }
+  }
+}

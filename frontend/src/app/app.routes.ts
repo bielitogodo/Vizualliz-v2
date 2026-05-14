@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { Login } from './features/login/login';
 import { Dashboard } from './features/dashboard/dashboard';
+import { Cardapio } from './features/cardapio/cardapio';
 
 /**
  * Mapa de rotas do aplicativo.
- * Cada objeto associa uma URL a um componente.
  */
 export const routes: Routes = [
   // Rota raiz: redireciona pra /login
@@ -20,10 +20,16 @@ export const routes: Routes = [
     component: Login
   },
 
-  // Dashboard (futuramente protegido por authGuard)
+  // Dashboard
   {
     path: 'dashboard',
     component: Dashboard
+  },
+
+  // Cardápio
+  {
+    path: 'cardapio',
+    component: Cardapio
   },
 
   // Wildcard: qualquer URL desconhecida volta pra /login
