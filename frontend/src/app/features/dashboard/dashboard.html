@@ -1,12 +1,36 @@
-<div style="padding: 40px; text-align: center;">
-  <h1>🎉 Dashboard</h1>
-  <p>Parabéns! Você está logado.</p>
-  <p>Em breve esta tela terá o painel completo do sistema.</p>
+<div class="dashboard-page">
 
-  <button
-    (click)="onLogout()"
-    style="margin-top: 20px; padding: 10px 20px; font-size: 16px; cursor: pointer;"
-  >
-    Sair
-  </button>
+  <!-- Header azul-marinho -->
+  <div class="page-header">
+    <div class="logo-section">
+      <div class="logo-circle">🍴</div>
+      <div class="titulos">
+        <h1>VIZUALLIZ</h1>
+        <p class="subtitle">Smart FoodTech</p>
+      </div>
+    </div>
+    <button class="btn-sair" (click)="onLogout()">Sair</button>
+  </div>
+
+  <!-- Conteúdo -->
+  <div class="content">
+
+    <h2 class="bem-vindo">Bem-vindo ao painel</h2>
+    <p class="subtitle-content">O que você quer fazer hoje?</p>
+
+    <!-- Grid de atalhos -->
+    <div class="atalhos-grid">
+      @for (atalho of atalhos; track atalho.rota) {
+        <button class="atalho-card" (click)="irPara(atalho.rota)">
+          <div class="atalho-icone">{{ atalho.icone }}</div>
+          <div class="atalho-info">
+            <div class="atalho-titulo">{{ atalho.titulo }}</div>
+            <div class="atalho-descricao">{{ atalho.descricao }}</div>
+          </div>
+          <div class="atalho-seta">→</div>
+        </button>
+      }
+    </div>
+
+  </div>
 </div>

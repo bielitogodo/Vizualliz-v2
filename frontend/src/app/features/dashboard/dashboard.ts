@@ -4,9 +4,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 
 /**
- * Dashboard placeholder.
- * Apenas confirma que o login funcionou e oferece botão de logout.
- * Será substituído por dashboard completo na Etapa 13.
+ * Dashboard principal do sistema.
+ * Mostra cards de acesso pras principais áreas.
  */
 @Component({
   selector: 'app-dashboard',
@@ -19,9 +18,38 @@ export class Dashboard {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  /**
-   * Faz logout no Firebase e redireciona pra tela de login.
-   */
+  // Lista de "atalhos" (cards de navegação)
+  atalhos = [
+    {
+      titulo: 'Pedidos',
+      descricao: 'Ver e gerenciar pedidos',
+      icone: '🧾',
+      rota: '/pedidos'
+    },
+    {
+      titulo: 'Novo Pedido',
+      descricao: 'Criar pedido agora',
+      icone: '➕',
+      rota: '/pedidos/novo'
+    },
+    {
+      titulo: 'Cardápio',
+      descricao: 'Gerenciar pratos',
+      icone: '🍴',
+      rota: '/cardapio'
+    },
+    {
+      titulo: 'Mesas',
+      descricao: 'Gerenciar mesas',
+      icone: '🪑',
+      rota: '/mesas'
+    }
+  ];
+
+  irPara(rota: string): void {
+    this.router.navigate([rota]);
+  }
+
   async onLogout(): Promise<void> {
     await this.authService.logout();
     await this.router.navigate(['/login']);

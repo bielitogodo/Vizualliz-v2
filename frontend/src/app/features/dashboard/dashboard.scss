@@ -1,0 +1,158 @@
+.dashboard-page {
+  min-height: 100vh;
+  background: var(--vz-cinza-fundo);
+}
+
+// Header azul-marinho com logo + botão sair
+.page-header {
+  background: var(--vz-azul-marinho);
+  color: var(--vz-branco);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0 0 30% 30% / 0 0 40px 40px;
+
+  .logo-section {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .logo-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--vz-branco);
+    color: var(--vz-azul-marinho);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+
+  .titulos {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    opacity: 0.85;
+    margin: 0;
+  }
+
+  .btn-sair {
+    background: transparent;
+    border: 2px solid var(--vz-branco);
+    color: var(--vz-branco);
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: var(--vz-branco);
+      color: var(--vz-azul-marinho);
+    }
+  }
+}
+
+.content {
+  padding: 32px 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.bem-vindo {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--vz-azul-marinho);
+  margin-bottom: 6px;
+}
+
+.subtitle-content {
+  font-size: 14px;
+  color: var(--vz-cinza-texto);
+  margin-bottom: 28px;
+}
+
+// Grid de atalhos (2 colunas em desktop, 1 em mobile)
+.atalhos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.atalho-card {
+  background: var(--vz-branco);
+  border: 1px solid var(--vz-cinza-borda);
+  border-radius: var(--vz-radius);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    border-color: var(--vz-azul-marinho);
+
+    .atalho-seta {
+      transform: translateX(4px);
+      color: var(--vz-azul-marinho);
+    }
+  }
+
+  .atalho-icone {
+    width: 56px;
+    height: 56px;
+    background: var(--vz-cinza-fundo);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .atalho-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .atalho-titulo {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--vz-azul-marinho);
+  }
+
+  .atalho-descricao {
+    font-size: 13px;
+    color: var(--vz-cinza-texto);
+  }
+
+  .atalho-seta {
+    font-size: 20px;
+    color: var(--vz-cinza-texto);
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+}
