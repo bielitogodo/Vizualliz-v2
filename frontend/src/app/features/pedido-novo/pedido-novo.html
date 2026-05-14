@@ -1,0 +1,122 @@
+<div class="pedido-novo-page">
+
+  <div class="page-header">
+    <button class="btn-voltar" (click)="voltar()">←</button>
+    <h1>Novo Pedido</h1>
+  </div>
+
+  <div class="content">
+
+    @if (carregando()) {
+      <p class="empty-state">Carregando...</p>
+    } @else {
+
+      <div class="layout-grid">
+
+        <!-- Coluna esquerda: seleção de mesa + cardápio -->
+        <div class="coluna-esquerda">
+
+          <!-- Mesas -->
+          <div class="card">
+            <h2>1. Escolha a mesa</h2>
+
+            @if (mesas().length === 0) {
+              <p class="empty-state">Nenhuma mesa cadastrada. Cadastre uma mesa primeiro.</p>
+            } @else {
+              <div class="mesas-list">
+                @for (mesa of mesas(); track mesa.id) {
+                  <button
+                    type="button"
+                    class="mesa-btn"
+                    [class.selecionada]="mesaSelecionada() === mesa.numero"
+                    (click)="mesaSelecionada.set(mesa.numero)">
+                    <span class="numero">{{ mesa.numero }}</span>
+                    <span class="info">{{ mesa.capacidade }} pessoas</span>
+                  </button>
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Cardápio -->
+          <div class="card">
+            <h2>2. Adicione pratos</h2>
+
+            @if (pratos().length === 0) {
+              <p class="empty-state">Nenhum prato cadastrado. Cadastre pratos no cardápio.</p>
+            } @else {
+              <ul class="pratos-list">
+                @for (prato of pratos(); track prato.id) {
+                  <li class="prato-item">
+                    <div class="prato-info">
+                      <span class="prato-nome">{{ prato.nome }}</span>
+                      <span class="prato-preco">R$ {{ prato.preco | number:'1.2-2' }}</span>
+                    </div>
+                    <button type="button" class="btn-add" (click)="adicionarPrato(prato)">+</button>
+                  </li>
+                }
+              </ul>
+            }
+          </div>
+
+        </div>
+
+        <!-- Coluna direita: carrinho -->
+        <div class="coluna-direita">
+          <div class="card carrinho-card">
+            <h2>3. Resumo</h2>
+
+            @if (mesaSelecionada()) {
+              <p class="mesa-escolhida">Mesa <strong>{{ mesaSelecionada() }}</strong></p>
+            } @else {
+              <p class="mesa-escolhida sem-mesa">Nenhuma mesa selecionada</p>
+            }
+
+            @if (itensPedido().length === 0) {
+              <p class="empty-state">Nenhum item adicionado.</p>
+            } @else {
+              <ul class="itens-list">
+                @for (item of itensPedido(); track item.pratoId) {
+                  <li class="item">
+                    <div class="item-info">
+                      <span class="item-nome">{{ item.nome }}</span>
+                      <span class="item-preco">R$ {{ item.preco | number:'1.2-2' }}</span>
+                    </div>
+                    <div class="item-quantidade">
+                      <button type="button" class="qtd-btn" (click)="diminuirItem(item.pratoId)">−</button>
+                      <span class="qtd">{{ item.quantidade }}</span>
+                      <button type="button" class="qtd-btn" (click)="adicionarPrato({id: item.pratoId, nome: item.nome, preco: item.preco})">+</button>
+                    </div>
+                  </li>
+                }
+              </ul>
+
+              <div class="total-row">
+                <span>Total</span>
+                <span class="total-valor">R$ {{ total() | number:'1.2-2' }}</span>
+              </div>
+            }
+
+            @if (erro()) {
+              <div class="error-message">{{ erro() }}</div>
+            }
+
+            <button
+              type="button"
+              class="btn-primary"
+              (click)="onSalvar()"
+              [disabled]="salvando() || itensPedido().length === 0 || mesaSelecionada() === null">
+              @if (salvando()) {
+                Salvando...
+              } @else {
+                Confirmar pedido
+              }
+            </button>
+          </div>
+        </div>
+
+      </div>
+    }
+
+  </div>
+</div>

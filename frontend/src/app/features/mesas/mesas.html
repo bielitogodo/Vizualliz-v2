@@ -1,0 +1,82 @@
+<div class="mesas-page">
+
+  <div class="page-header">
+    <button class="btn-voltar" (click)="voltar()">←</button>
+    <h1>Mesas</h1>
+  </div>
+
+  <div class="content">
+
+    <div class="card">
+      <h2>Cadastrar mesa</h2>
+
+      <form (ngSubmit)="onSalvar()" #formMesa="ngForm">
+
+        <div class="input-group">
+          <label>Número da mesa</label>
+          <input
+            type="number"
+            name="numero"
+            min="1"
+            [ngModel]="numero()"
+            (ngModelChange)="numero.set($event)"
+            placeholder="Ex: 1"
+            required
+            [disabled]="salvando()"
+          />
+        </div>
+
+        <div class="input-group">
+          <label>Capacidade (pessoas)</label>
+          <input
+            type="number"
+            name="capacidade"
+            min="1"
+            [ngModel]="capacidade()"
+            (ngModelChange)="capacidade.set($event)"
+            placeholder="Ex: 4"
+            required
+            [disabled]="salvando()"
+          />
+        </div>
+
+        @if (erro()) {
+          <div class="error-message">{{ erro() }}</div>
+        }
+
+        <button type="submit" class="btn-primary" [disabled]="salvando()">
+          @if (salvando()) {
+            Salvando...
+          } @else {
+            Cadastrar mesa
+          }
+        </button>
+
+      </form>
+    </div>
+
+    <div class="card lista-card">
+      <h2>Mesas cadastradas</h2>
+
+      @if (carregando()) {
+        <p class="empty-state">Carregando...</p>
+      } @else if (mesas().length === 0) {
+        <p class="empty-state">Nenhuma mesa cadastrada ainda.</p>
+      } @else {
+        <div class="grid-mesas">
+          @for (mesa of mesas(); track mesa.id) {
+            <div class="mesa-card">
+              <div class="mesa-numero">{{ mesa.numero }}</div>
+              <div class="mesa-info">
+                <span class="mesa-label">Mesa</span>
+                <span class="mesa-capacidade">{{ mesa.capacidade }} pessoas</span>
+              </div>
+              <button class="btn-remover" (click)="onRemover(mesa)">🗑️</button>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+  </div>
+</div>

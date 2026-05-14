@@ -1,0 +1,102 @@
+<div class="pedidos-page">
+
+  <div class="page-header">
+    <button class="btn-voltar" (click)="voltar()">←</button>
+    <h1>Pedidos</h1>
+    <button class="btn-novo" (click)="irParaNovoPedido()">+ Novo Pedido</button>
+  </div>
+
+  <div class="content">
+
+    <!-- Filtros de status (tabs) -->
+    <div class="filtros">
+      <button
+        class="filtro-btn"
+        [class.ativo]="filtroStatus() === 'todos'"
+        (click)="filtroStatus.set('todos')">
+        Todos
+        <span class="badge">{{ contadores().todos }}</span>
+      </button>
+      <button
+        class="filtro-btn status-feito"
+        [class.ativo]="filtroStatus() === 'feito'"
+        (click)="filtroStatus.set('feito')">
+        Pedido feito
+        <span class="badge">{{ contadores().feito }}</span>
+      </button>
+      <button
+        class="filtro-btn status-entregue"
+        [class.ativo]="filtroStatus() === 'entregue'"
+        (click)="filtroStatus.set('entregue')">
+        Entregue
+        <span class="badge">{{ contadores().entregue }}</span>
+      </button>
+      <button
+        class="filtro-btn status-finalizado"
+        [class.ativo]="filtroStatus() === 'finalizado'"
+        (click)="filtroStatus.set('finalizado')">
+        Finalizado
+        <span class="badge">{{ contadores().finalizado }}</span>
+      </button>
+    </div>
+
+    <!-- Lista de pedidos -->
+    @if (carregando()) {
+      <p class="empty-state">Carregando pedidos...</p>
+    } @else if (pedidosFiltrados().length === 0) {
+      <div class="card empty-card">
+        <p class="empty-state">Nenhum pedido encontrado neste filtro.</p>
+      </div>
+    } @else {
+      <div class="grid-pedidos">
+        @for (pedido of pedidosFiltrados(); track pedido.id) {
+          <div class="pedido-card" [class]="'status-' + pedido.status">
+
+            <!-- Header do card -->
+            <div class="pedido-header">
+              <div class="mesa-info">
+                <span class="mesa-label">Mesa</span>
+                <span class="mesa-numero">{{ pedido.mesaNumero }}</span>
+              </div>
+              <div class="status-badge">{{ textoStatus(pedido.status) }}</div>
+            </div>
+
+            <!-- Itens do pedido -->
+            <ul class="itens-list">
+              @for (item of pedido.itens; track item.pratoId) {
+                <li class="item">
+                  <span class="qtd">{{ item.quantidade }}x</span>
+                  <span class="nome">{{ item.nome }}</span>
+                  <span class="preco">R$ {{ (item.preco * item.quantidade) | number:'1.2-2' }}</span>
+                </li>
+              }
+            </ul>
+
+            <!-- Total -->
+            <div class="total-row">
+              <span>Total</span>
+              <span class="total-valor">R$ {{ pedido.total | number:'1.2-2' }}</span>
+            </div>
+
+            <!-- Ações -->
+            <div class="acoes">
+              @if (pedido.status !== 'finalizado') {
+                <button class="btn-avancar" (click)="avancarStatus(pedido)">
+                  {{ textoBotaoAvancar(pedido.status) }}
+                </button>
+              } @else {
+                <span class="finalizado-badge">✓ Pedido concluído</span>
+              }
+
+              <button class="btn-remover" (click)="removerPedido(pedido)" title="Remover">
+                🗑️
+              </button>
+            </div>
+
+          </div>
+        }
+      </div>
+    }
+
+  </div>
+</div>
