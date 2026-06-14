@@ -103,8 +103,28 @@ export class Pedidos implements OnInit {
   }
 
   /**
-   * Texto amigável do status.
+   * Calcula quanto tempo passou desde a criação do pedido.
+   * Retorna texto amigável tipo "5 minutos", "2 horas" ou "1 dia".
    */
+  calcularTempo(criadoEm: number): string {
+    const agora = Date.now();
+    const diff = agora - criadoEm;
+
+    const minutos = Math.floor(diff / 60000);
+    const horas = Math.floor(diff / 3600000);
+    const dias = Math.floor(diff / 86400000);
+
+    if (dias > 0) {
+      return dias === 1 ? '1 dia' : `${dias} dias`;
+    }
+    if (horas > 0) {
+      return horas === 1 ? '1 hora' : `${horas} horas`;
+    }
+    if (minutos > 0) {
+      return minutos === 1 ? '1 minuto' : `${minutos} minutos`;
+    }
+    return 'agora';
+  }
   textoStatus(status: StatusPedido): string {
     const textos = {
       'feito': 'Pedido feito',

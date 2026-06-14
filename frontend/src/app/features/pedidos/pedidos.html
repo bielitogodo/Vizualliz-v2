@@ -57,6 +57,7 @@
               <div class="mesa-info">
                 <span class="mesa-label">Mesa</span>
                 <span class="mesa-numero">{{ pedido.mesaNumero }}</span>
+                <span class="mesa-horario">Há {{ calcularTempo(pedido.criadoEm) }}</span>
               </div>
               <div class="status-badge">{{ textoStatus(pedido.status) }}</div>
             </div>
