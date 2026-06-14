@@ -16,7 +16,50 @@
   <div class="content">
 
     <h2 class="bem-vindo">Bem-vindo ao painel</h2>
-    <p class="subtitle-content">O que você quer fazer hoje?</p>
+    <p class="subtitle-content">Visão geral do restaurante em tempo real</p>
+
+    <!-- Cards de estatísticas -->
+    @if (carregando()) {
+      <p class="empty-state">Carregando estatísticas...</p>
+    } @else {
+      <div class="stats-grid">
+
+        <div class="stat-card stat-pedidos">
+          <div class="stat-icone">📋</div>
+          <div class="stat-info">
+            <div class="stat-valor">{{ estatisticas().pedidosHoje }}</div>
+            <div class="stat-label">Pedidos hoje</div>
+          </div>
+        </div>
+
+        <div class="stat-card stat-faturamento">
+          <div class="stat-icone">💰</div>
+          <div class="stat-info">
+            <div class="stat-valor">R$ {{ estatisticas().faturamentoHoje | number:'1.2-2' }}</div>
+            <div class="stat-label">Faturamento hoje</div>
+          </div>
+        </div>
+
+        <div class="stat-card stat-andamento">
+          <div class="stat-icone">🟡</div>
+          <div class="stat-info">
+            <div class="stat-valor">{{ estatisticas().emAndamento }}</div>
+            <div class="stat-label">Em andamento</div>
+          </div>
+        </div>
+
+        <div class="stat-card stat-mesas">
+          <div class="stat-icone">🪑</div>
+          <div class="stat-info">
+            <div class="stat-valor">{{ estatisticas().totalMesas }}</div>
+            <div class="stat-label">Mesas cadastradas</div>
+          </div>
+        </div>
+
+      </div>
+    }
+
+    <h2 class="secao-titulo">O que você quer fazer?</h2>
 
     <!-- Grid de atalhos -->
     <div class="atalhos-grid">
