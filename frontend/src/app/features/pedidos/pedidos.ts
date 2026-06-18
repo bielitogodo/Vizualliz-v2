@@ -2,6 +2,7 @@ import { Component, inject, signal, computed, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PedidosService, Pedido, StatusPedido } from '../../core/services/pedidos.service';
+import { ToastService } from '../../core/services/toast.service';
 
 /**
  * Tela que lista todos os pedidos e permite mudar status.
@@ -17,6 +18,7 @@ import { PedidosService, Pedido, StatusPedido } from '../../core/services/pedido
 export class Pedidos implements OnInit {
   private pedidosService = inject(PedidosService);
   private router = inject(Router);
+  private toastService = inject(ToastService);
 
   pedidos = signal<Pedido[]>([]);
   carregando = signal(true);
@@ -74,6 +76,7 @@ export class Pedidos implements OnInit {
 
     try {
       await this.pedidosService.atualizarStatus(pedido.id, novoStatus);
+      this.toastService.sucesso(`Pedido atualizado para "${this.textoStatus(novoStatus)}"`);
       await this.carregarPedidos();
     } catch (e) {
       alert('Erro ao atualizar status.');
@@ -87,6 +90,7 @@ export class Pedidos implements OnInit {
 
     try {
       await this.pedidosService.removerPedido(pedido.id);
+      this.toastService.sucesso('Pedido removido');
       await this.carregarPedidos();
     } catch (e) {
       alert('Erro ao remover pedido.');

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CardapioService, Prato } from '../../core/services/cardapio.service';
+import { ToastService } from '../../core/services/toast.service';
 
 /**
  * Componente da tela de Cardápio.
@@ -17,6 +18,7 @@ import { CardapioService, Prato } from '../../core/services/cardapio.service';
 export class Cardapio implements OnInit {
   private cardapioService = inject(CardapioService);
   private router = inject(Router);
+  private toastService = inject(ToastService);
 
   // Lista de pratos (signal — array simples)
   pratos = signal<Prato[]>([]);
@@ -72,6 +74,8 @@ export class Cardapio implements OnInit {
         preco: precoValor
       });
 
+      this.toastService.sucesso('Prato cadastrado!');
+
       // Limpa form e recarrega lista
       this.nome.set('');
       this.preco.set(null);
@@ -95,6 +99,7 @@ export class Cardapio implements OnInit {
 
     try {
       await this.cardapioService.removerPrato(prato.id);
+      this.toastService.sucesso('Prato removido');
       await this.carregarPratos();
     } catch (e: any) {
       alert('Erro ao remover prato.');

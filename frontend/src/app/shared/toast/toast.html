@@ -1,0 +1,16 @@
+<!-- Container dos toasts (fica fixo no canto inferior direito) -->
+<div class="toast-container">
+  @for (toast of toasts(); track toast.id) {
+    <div class="toast" [class]="'toast-' + toast.tipo">
+      <span class="toast-icone">
+        @if (toast.tipo === 'sucesso') {
+          ✅
+        } @else {
+          ❌
+        }
+      </span>
+      <span class="toast-mensagem">{{ toast.mensagem }}</span>
+      <button class="toast-fechar" (click)="fechar(toast.id)">×</button>
+    </div>
+  }
+</div>

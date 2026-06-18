@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MesasService, Mesa } from '../../core/services/mesas.service';
+import { ToastService } from '../../core/services/toast.service';
 
 /**
  * Componente da tela de Mesas.
@@ -17,6 +18,7 @@ import { MesasService, Mesa } from '../../core/services/mesas.service';
 export class Mesas implements OnInit {
   private mesasService = inject(MesasService);
   private router = inject(Router);
+  private toastService = inject(ToastService);
 
   mesas = signal<Mesa[]>([]);
   carregando = signal(true);
@@ -74,6 +76,8 @@ export class Mesas implements OnInit {
         capacidade: cap
       });
 
+      this.toastService.sucesso(`Mesa ${num} cadastrada!`);
+
       this.numero.set(null);
       this.capacidade.set(null);
       await this.carregarMesas();
@@ -93,6 +97,7 @@ export class Mesas implements OnInit {
 
     try {
       await this.mesasService.removerMesa(mesa.id);
+      this.toastService.sucesso('Mesa removida');
       await this.carregarMesas();
     } catch (e: any) {
       alert('Erro ao remover mesa.');
